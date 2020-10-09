@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+  - name: Install ssh key
+    authorized_key:
+      user: centos
+      state: present
+      key: "ssh-rsa 
+            AAAAB3NzaC1yc2EAAAADAQABAAABgQDHeAnVAIy9FEHxKOyClBq9AedD9D5UjMFGgXsG77luzKqOlHA05qB1wZ6JfG381WXO4f+NYArqgMPSKkOkwPiZk8eGAeDG36IWdjNS1yIy9NCocTIiEujMTTTTz/lnqVs22aycubEqb89Ln43hV5OKkhI/Qw3xWokK+grz3wUJjDBQyQf70yQqUhLRyHCQAJTKkppFkNpd6oXnKNMg6HZuYayIupbuD5cXpepsxORVqxd06B9z7nSfEAzfp9a1mKdvVOwgF9Mwo/PG/nlyZWW376xGC2qY4LBWPOcAWcl8tvw3xm5+eCNXI7Et3NSjOSSUM2ijKhqqxVlXpkN9pqg2qUuplMX+knViq1iOwvN3EI8ZyjZdb1BWkomiO3uhGtdvfJPt0c0MG0ZJPSlYcYRxEvTrCF/F3BDHuLJlTsLZeyOmf9es9QLt294Qd5Wjxxjc8gD8eTBwPW/OvDNpLhNf6F/nsgCofUwzc088gm19znvE2zKUtq18GI7sLcJ26iM= johnoshikoya@johns-MBP
