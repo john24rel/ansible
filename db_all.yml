@@ -1,0 +1,66 @@
+- hosts: db
+  tasks:
+  - name: Install Mysql
+    yum:
+      name: mariadb-server
+      state: latest
+
+  - name: Start mariadb
+    systemd:
+      name: mariadb
+      state: started
+
+  - name: Enable mariadb
+    systemd:
+      name: mariadb
+      enabled: yes
+      masked: no
+
+- hosts: db
+  tasks:
+  - name: Install client
+    yum:
+      name: mariadb
+      state: latest
+
+- hosts: db
+  tasks:
+  - name: Download Templates
+    get_url:
+      url: https://wordpress.org/latest.zip
+      dest: "/home/centos/"
+
+- hosts: db
+  tasks:
+  - name: Install unzip
+    yum:
+      name: unzip
+      state: latest
+
+  - name: unzip
+    unarchive:
+      src: https://wordpress.org/latest.zip
+      dest: "/home/centos"
+      remote_src: yes
+
+- hosts: db
+  tasks:
+  - name: copy file
+    shell: "rsync -r /home/centos/wordpress/*   /var/www/html"
+
+- hosts: db
+  tasks:
+  - name: change uid and gid
+    shell: "chown -R apache:apache /var/www/html"
+
+
+- hosts: db
+  tasks:
+  - selinux:
+      state: disabled
+
+- hosts: db
+  tasks:
+  - selinux:
+      state: permissive
+

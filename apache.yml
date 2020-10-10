@@ -1,0 +1,34 @@
+- hosts: web
+  tasks:
+  - name: download zip
+    shell: "wget https://www.free-css.com/assets/files/free-css-templates/download/page259/health.zip"
+
+
+- hosts: web
+  tasks:
+  - name: unzip
+    shell: "unzip health.zip"
+
+- hosts: web
+  tasks:
+  - name: rsync copy
+    shell:"rsync -r health/    var/www/html"
+
+- hosts: web
+  tasks:
+  - name: change uid and gid
+    shell:"chown -R apache:apache  /var/www/html"
+
+- hosts: all
+  tasks:
+  - name: setenfore
+    shell:"setenforce 0"
+
+- name: Disable SELinux
+  ansible.posix.selinux:
+    state: disabled
+nsible.posix.selinux:
+    state: disabled
+nsible.posix.selinux:
+    state: disabled
+

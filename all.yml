@@ -16,3 +16,15 @@
     yum:
       name: mariadb-server
       state: latest
+- hosts: all
+  tasks:
+  - name: Install wget
+    yum:
+      name: wget
+      state: latest
+- hosts: all
+  tasks:
+  - name: Install unzip
+    yum:
+      name: unzip
+      state: latest
