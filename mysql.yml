@@ -1,9 +1,9 @@
 - name: MariaDB
-  hosts: all
+  hosts: db
   gather_facts: true
   become: true
   vars:
-    mysql_root_password: "Password1"
+    mysql_root_password: "12345678"
   tasks:
     - name: install mariadb
       yum:
@@ -18,11 +18,11 @@
         state: started
     - name: mysql_root_password
       mysql_user:
-        login_user: root
-        login_password: "{{ mysql_root_password }}"
-        user: root
+        login_user: wordpress
+        login_password: "{{12345678}}"
+        user: admin
         check_implicit_admin: true
-        password: "{{ mysql_root_password }}"
+        password: "{{12345678 }}"
         host: db
     - name: remove remote root
       mysql_user:
