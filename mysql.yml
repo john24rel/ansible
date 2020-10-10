@@ -1,34 +1,50 @@
-- name: MariaDB
-  hosts: db
+- hosts: db
+  tasks:
+  - name: Inst
+    yum:
+      name:
+           - mysql-devel
+           - centos-release-scl
+      state: present
+
+- hosts: db
+  tasks:
+  - name: Install MySQl
+    yum:
+      name: mariadb
+      state: latest
+- hosts: db
   gather_facts: true
   become: true
   vars:
     mysql_root_password: "12345678"
   tasks:
-    - name: install mariadb
-      yum:
-        name:
-          - mariadb-server
-          - python3-PyMySQL
-        state: latest
-    - name: start mariadb
-      service:
-        name: mariadb
-        enabled: true
-        state: started
-    - name: mysql_root_password
-      mysql_user:
-        login_user: wordpress
-        login_password: "{{12345678}}"
-        user: admin
-        check_implicit_admin: true
-        password: "{{12345678 }}"
-        host: db
-    - name: remove remote root
-      mysql_user:
-        check_implicit_admin: true
-        login_user: root
-        login_password: "{{ mysql_root_password }}"
-        user: root
-        host: "{{ ansible_fqdn }}"
-        state: absent
+  - name: Install Mysql
+    yum:
+      name: mariadb-server
+      state: latest
+
+  - name: Start mariadb
+    systemd:
+      name: mariadb
+      state: started
+
+  - name: Enable mariadb
+    systemd:
+      name: mariadb
+      enabled: yes
+      masked: no
+  - name: mysql_root_password
+    mysql_user:
+      login_user: wordpress
+      login_password: "12345678"
+      user: admin
+      check_implicit_admin: true
+      password: "12345678"
+
+
+
+
+
+
+
