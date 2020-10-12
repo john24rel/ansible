@@ -1,0 +1,34 @@
+- hosts: web
+  tasks:
+  - name: enable php7.4
+    shell:  amazon-linux-extras enable php7.4
+    become: yes
+
+  - name: clean metadata
+    shell:  yum clean metadata
+    become: yes
+
+  - name: install php-cli
+    yum:
+      name: php-cli 
+      state: latest
+
+  - name: install php-pdo
+    yum:
+      name: php-pdo
+      state: latest
+
+  - name: install php-fpm
+    yum:
+      name: php-fpm  
+      state: latest
+
+  - name: install php-json
+    yum:
+      name: php-json
+      state: latest
+
+  - name: install php-mysqlnd
+    yum:
+      name: php-mysqlnd
+      state: latest
