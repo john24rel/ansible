@@ -1,0 +1,5 @@
+[web]
+
+54.236.19.108   ansible_user=ec2-user
+
+

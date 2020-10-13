@@ -4,6 +4,14 @@
     shell:  amazon-linux-extras enable php7.4
     become: yes
 
+  - name: enable python3.8
+    shell:  amazon-linux-extras enable python3.8
+    become: yes
+
+  - name: enable ansible2
+    shell:  amazon-linux-extras enable ansible2
+    become: yes
+
   - name: clean metadata
     shell:  yum clean metadata
     become: yes
@@ -32,3 +40,18 @@
     yum:
       name: php-mysqlnd
       state: latest
+ 
+  - name: install python3.8
+    yum:
+      name: python3.8
+      state: latest
+      become: yes
+      update_cache: yes        
+
+  - name: install MySQL-python
+    yum:
+      name: MySQL-python
+      state: latest
+      become: yes
+      update_cache: yes
+  

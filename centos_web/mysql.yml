@@ -13,6 +13,7 @@
     yum:
       name: mariadb
       state: latest
+
 - hosts: db
   gather_facts: true
   become: true

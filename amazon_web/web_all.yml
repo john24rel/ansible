@@ -4,7 +4,11 @@
     yum:
       name: httpd
       state: latest
-  
+
+  - name: Change Hostname
+    hostname:
+      name: web
+
   - name: Start httpd
     systemd:
       name: httpd
@@ -14,12 +18,9 @@
     systemd:
       name: httpd
       enabled: yes
-      masked: noi
- 
- - name: Change Hostname
-    hostname:
-      name: web
-   
+      masked: no 
+
+  tasks:  
   - name: Download Templates
     get_url:
       url: https://www.free-css.com/assets/files/free-css-templates/download/page253/estateagency.zip

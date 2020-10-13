@@ -76,11 +76,6 @@
     shell: "chown -R apache:apache /var/www/html"
 
 
-- hosts: web
-  tasks:
-  - selinux:
-      state: disabled
-
   - name: Restart httpd
     systemd:
       name: httpd
