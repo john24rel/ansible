@@ -22,24 +22,6 @@
 
 - hosts: web
   tasks:
-  - name: Install Mysql
-    yum:
-      name: mariadb-server
-      state: latest
-
-  - name: Start mariadb
-    systemd:
-      name: mariadb
-      state: started
-
-  - name: Enable mariadb
-    systemd:
-      name: mariadb
-      enabled: yes
-      masked: no
-
-- hosts: web
-  tasks:
   - name: Install client
     yum:
       name: mariadb

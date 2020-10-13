@@ -40,18 +40,56 @@
     yum:
       name: php-mysqlnd
       state: latest
- 
-  - name: install python3.8
+
+  - name: install python-libs
     yum:
-      name: python3.8
+      name:  python38-libs
       state: latest
-      become: yes
-      update_cache: yes        
+
+  - name: install python-pip
+    yum:
+      name:  python38-pip
+      state: latest
+
+  - name: install python38-setuptools
+    yum:
+      name:  python38-setuptools
+      state: latest
+
+  - name: install python38
+    yum:
+      name:  python38
+      state: latest
+   
 
   - name: install MySQL-python
     yum:
-      name: MySQL-python
+      name:  MySQL-python
       state: latest
-      become: yes
-      update_cache: yes
-  
+
+- hosts: web
+  tasks:
+  - name: Install client
+    yum:
+      name: mariadb
+      state: latest
+
+- hosts: web
+  tasks:
+  - name: Install Mysql
+    yum:
+      name: mariadb-server
+      state: latest
+
+  - name: Start mariadb
+    systemd:
+      name: mariadb
+      state: started
+
+  - name: Enable mariadb
+    become: yes
+    shell: "systemctl enable mariadb"
+      
+  - name: Restart  mariadb
+    become: yes
+    shell: "systemctl restart mariadb"

@@ -23,3 +23,44 @@
       name: php-mysql
       state: latest
 
+- hosts: web
+  tasks:
+  - name: Install client
+    yum:
+      name: mariadb
+      state: latest
+
+- hosts: web
+  tasks:
+  - name: Install client
+    yum:
+      name: python3
+      state: latest
+
+- hosts: web
+  tasks:
+  - name: Install client
+    yum:
+      name: MySQL-python
+      state: latest
+
+
+- hosts: web
+  tasks:
+  - name: Install Mysql
+    yum:
+      name: mariadb-server
+      state: latest
+
+  - name: Start mariadb
+    systemd:
+      name: mariadb
+      state: started
+
+  - name: Enable mariadb
+    become: yes
+    shell: "systemctl enable mariadb"
+      
+  - name: Restart  mariadb
+    become: yes
+    shell: "systemctl restart mariadb"

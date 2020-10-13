@@ -1,51 +1,19 @@
-- hosts: db
+- hosts: web
   tasks:
-  - name: Inst
-    yum:
-      name:
-           - mysql-devel
-           - centos-release-scl
+  - name: Create a new database with name 'bobdata'
+    mysql_db:
+      name: wordpress
       state: present
 
-- hosts: db
-  tasks:
-  - name: Install MySQl
-    yum:
-      name: mariadb
-      state: latest
-
-- hosts: db
-  gather_facts: true
-  become: true
-  vars:
-    mysql_root_password: "12345678"
-  tasks:
-  - name: Install Mysql
-    yum:
-      name: mariadb-server
-      state: latest
-
-  - name: Start mariadb
-    systemd:
-      name: mariadb
-      state: started
-
-  - name: Enable mariadb
-    systemd:
-      name: mariadb
-      enabled: yes
-      masked: no
-  - name: mysql_root_password
+  - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
     mysql_user:
-      login_user: wordpress
-      login_password: "12345678"
-      user: admin
-      check_implicit_admin: true
-      password: "12345678"
-
-
-
-
-
-
+      name: admin
+      password: 12345
+      priv: '*.*:ALL,GRANT'
+      state: present
+ 
+  - name: Restart httpd
+    systemd:
+      name: httpd
+      state: restarted
 

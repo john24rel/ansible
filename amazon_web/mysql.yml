@@ -10,9 +10,10 @@
       name: admin
       password: 12345
       priv: '*.*:ALL,GRANT'
-      check_implicit_admin: yes
-      login_user: wordpress
-      login_password: 123456
       state: present
  
- 
+  - name: Restart httpd
+    systemd:
+      name: httpd
+      state: restarted
+
